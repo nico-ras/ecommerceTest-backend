@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
-const { getAllProducts, getAllCategories, getProducts } = require("./consultas.js")
+const bodyParser = require('body-parser')
+const { getAllProducts, getAllCategories, getProducts, getSearch } = require("./consultas.js")
+
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 
 app.listen(3000, () => {
     console.log("Server on");
@@ -131,6 +135,23 @@ app.listen(3000, () => {
         const products = await getProducts(7)
         res.send ({
             productos: products
+        })
+    } catch(err) {
+        return res.status(404).send({
+            message: "error",
+            status: "error",
+            res: err,
+        })
+    }
+  })
+
+  app.get("/search", async (req,res) => {
+    try {
+        let searchStr = req.body.search
+        const products = await getSearch(searchStr)
+        
+        res.send ({
+            products,  
         })
     } catch(err) {
         return res.status(404).send({

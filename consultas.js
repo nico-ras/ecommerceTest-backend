@@ -42,9 +42,21 @@ const getProducts = (dato) =>{
     });
 };
 
+const getSearch = (searchString) =>{
+
+     var sql_statement = ' (name LIKE "%'+searchString+'%" OR price LIKE "%'+searchString+'%") ';
+
+    return new Promise((resolve, reject)=>{
+        pool.query(`SELECT * FROM product WHERE ${sql_statement}`,  (error, elements)=>{
+            if(error){
+                return reject(error);
+            }
+            return resolve(elements);
+        });
+    });
+};
 
 
 
-
-module.exports = { getAllProducts, getAllCategories, getProducts }
+module.exports = { getAllProducts, getAllCategories, getProducts, getSearch }
 
