@@ -6,6 +6,14 @@ const { getAllProducts, getAllCategories, getProducts, getSearch } = require("./
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header('Access-Control-Allow-Methods', 'GET, POST');
+    res.header('Allow', 'GET, POST');
+    next();
+});
+
 app.listen(3000, () => {
     console.log("Server on");
   });
@@ -145,7 +153,7 @@ app.listen(3000, () => {
     }
   })
 
-  app.get("/search", async (req,res) => {
+  app.post("/search", async (req,res) => {
     try {
         let searchStr = req.body.search
         const products = await getSearch(searchStr)
