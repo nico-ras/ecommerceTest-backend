@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const { getAllProducts } = require("./consultas.js")
 
 app.listen(3000, () => {
     console.log("Server on");
@@ -7,7 +8,7 @@ app.listen(3000, () => {
 
   app.get("/", async (req,res) => {
     try {
-        const products = await getProducts()
+        const products = await getAllProducts()
         res.send ({
             productos: products
         })
@@ -15,6 +16,7 @@ app.listen(3000, () => {
         return res.status(404).send({
             message: "error",
             status: "error",
+            res: err,
         })
     }
   })
