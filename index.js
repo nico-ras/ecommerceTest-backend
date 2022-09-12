@@ -66,34 +66,78 @@ app.listen(3000, () => {
     }
   })
 
-  // "productos": [
-//     {
-//         "id": 1,
-//         "name": "bebida energetica"
-//     },
-//     {
-//         "id": 2,
-//         "name": "pisco"
-//     },
-//     {
-//         "id": 3,
-//         "name": "ron"
-//     },
-//     {
-//         "id": 4,
-//         "name": "bebida"
-//     },
-//     {
-//         "id": 5,
-//         "name": "snack"
-//     },
-//     {
-//         "id": 6,
-//         "name": "cerveza"
-//     },
-//     {
-//         "id": 7,
-//         "name": "vodka"
-//     }
-// ]
-  
+  app.get("/ron", async (req,res) => {
+    try {
+        const products = await getProducts(3)
+        res.send ({
+            productos: products
+        })
+    } catch(err) {
+        return res.status(404).send({
+            message: "error",
+            status: "error",
+            res: err,
+        })
+    }
+  })
+
+  app.get("/bebida", async (req,res) => {
+    try {
+        const products = await getProducts(4)
+        res.send ({
+            productos: products
+        })
+    } catch(err) {
+        return res.status(404).send({
+            message: "error",
+            status: "error",
+            res: err,
+        })
+    }
+  })
+
+  app.get("/snack", async (req,res) => {
+    try {
+        const products = await getProducts(5)
+        res.send ({
+            productos: products
+        })
+    } catch(err) {
+        return res.status(404).send({
+            message: "error",
+            status: "error",
+            res: err,
+        })
+    }
+  })
+
+  app.get("/cerveza", async (req,res) => {
+    try {
+        const products = await getProducts(6)
+        res.send ({
+            productos: products
+        })
+    } catch(err) {
+        return res.status(404).send({
+            message: "error",
+            status: "error",
+            res: err,
+        })
+    }
+  })
+
+  app.get("/vodka", async (req,res) => {
+    try {
+        const products = await getProducts(7)
+        res.send ({
+            productos: products
+        })
+    } catch(err) {
+        return res.status(404).send({
+            message: "error",
+            status: "error",
+            res: err,
+        })
+    }
+  })
+
