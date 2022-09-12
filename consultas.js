@@ -19,4 +19,32 @@ const getAllProducts = () =>{
     });
 };
 
-module.exports = { getAllProducts }
+const getAllCategories = () =>{
+    return new Promise((resolve, reject)=>{
+        pool.query('SELECT * FROM category',  (error, elements)=>{
+            if(error){
+                return reject(error);
+            }
+            return resolve(elements);
+        });
+    });
+};
+
+const getProducts = (dato) =>{
+    const id = dato
+    return new Promise((resolve, reject)=>{
+        pool.query(`SELECT * FROM product WHERE category = ${id}`,  (error, elements)=>{
+            if(error){
+                return reject(error);
+            }
+            return resolve(elements);
+        });
+    });
+};
+
+
+
+
+
+module.exports = { getAllProducts, getAllCategories, getProducts }
+
